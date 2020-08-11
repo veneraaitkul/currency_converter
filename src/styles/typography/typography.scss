@@ -1,0 +1,41 @@
+/** =================== Heebo =================== **/
+
+/** Heebo Thin **/
+@font-face {
+ font-family: "Heebo";
+ font-weight: 300;
+ font-style: normal;
+ src: url("Heebo-Light.ttf") format("truetype");
+}
+
+/** Heebo Regular **/
+@font-face {
+ font-family: "Heebo";
+ font-weight: 400;
+ font-style: normal;
+ src: url("Heebo-Regular.ttf") format("truetype");
+}
+
+/** Heebo Medium **/
+@font-face {
+ font-family: "Heebo";
+ font-weight: 500;
+ font-style: normal;
+ src: url("Heebo-Medium.ttf") format("truetype");
+}
+
+/** Heebo Semibold **/
+@font-face {
+ font-family: "Heebo";
+ font-weight: 600;
+ font-style: normal;
+ src: url("Heebo-SemiBold.ttf") format("truetype");
+}
+
+/** Heebo Bold **/
+@font-face {
+ font-family: "Heebo";
+ font-weight: 700;
+ font-style: normal;
+ src: url("Heebo-Bold.ttf") format("truetype");
+}
