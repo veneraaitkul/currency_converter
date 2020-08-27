@@ -1,13 +1,13 @@
 import React from "react";
-import { ReactComponent as SmallLogo } from "../assets/small-logo.svg";
+import logo from "../assets/logo.png";
 
 export default function Footer() {
   return (
     <div>
       <div className="container mx-auto pl-8 pr-8 lg:pr-0 lg:pl-0 border-t-2 border-gray-200 pt-12">
         <div className="flex flex-wrap mb-16 w-full">
-          <div className="w-full w-1/2 md:w-1/2 lg:w-1/6 md:mb-2 pt-5 mb-8  lg:mb-0 ">
-            <SmallLogo />
+          <div className="w-full w-1/2 md:w-1/2 lg:w-1/6 md:mb-2 pt-5 mb-8 lg:mb-0 ">
+            <img src={logo} alt="Logo" />
           </div>
 
           <div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/6 text-sm tracking-wide mb-4 lg:mb-0">
@@ -109,12 +109,12 @@ export default function Footer() {
 
         <div className="text-gray-500 text-xs tracking-wider">
           <p className="mb-4 lg:mb-2 leading-5">
-            Uphold Europe Limited, Reg No. 09281410, Registered Office:
-            Interchange Triangle, Chalk Farm Road, London, England, NW18AB
+            It's just an invented adress because why not.
           </p>
           <div className="lg:flex mb-16 lg:mb-24">
             <p className="lg:flex-initial pr-2">
-              &copy; Uphold, Inc. 2018. All Rights Reserved.
+              &copy; Invented Company, Inc. 1984. All Rights Obviously Not
+              Reserved.
             </p>
             <span className="lg:flex-initial mx-2 border-b-2">Agreements</span>
             <span className="lg:flex-initial mx-2 border-b-2">

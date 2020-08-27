@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import SimpleBarReact from "simplebar-react";
-import { api } from "../api/api";
 import Result from "./Result";
 import { ReactComponent as DropdownIcon } from "../assets/dropdown-icon.svg";
 
 import "simplebar/src/simplebar.css";
 
-function Dropdown() {
+function Calculator() {
   const [selectedCurrency, setSelectedCurrency] = useState({
     curr: {
       id: 0,
@@ -17,19 +16,6 @@ function Dropdown() {
   const [amount, setAmount] = useState();
   const [rateResult, setRateResult] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  useEffect(() => {
-    // get rates
-    api
-      .getTicker(selectedCurrency.curr.currency)
-      .then((res) => {
-        let data = res.filter(
-          (el) => el.currency === selectedCurrency.curr.currency
-        );
-        setRateResult(data);
-      })
-      .catch((err) => console.log(err));
-  }, [selectedCurrency.curr.currency]);
 
   // currency convertion options
   const options = [
@@ -45,18 +31,18 @@ function Dropdown() {
     },
     {
       id: 2,
-      currency: "BAT",
-      imageSrc: require("../assets/BAT.png"),
+      currency: "CAD",
+      imageSrc: require("../assets/CAD.png"),
     },
     {
       id: 3,
-      currency: "BTC",
-      imageSrc: require("../assets/BTC.png"),
+      currency: "CHF",
+      imageSrc: require("../assets/CHF.png"),
     },
     {
       id: 4,
-      currency: "BCH",
-      imageSrc: require("../assets/BCH.png"),
+      currency: "HKD",
+      imageSrc: require("../assets/HKD.png"),
     },
     {
       id: 5,
@@ -65,8 +51,8 @@ function Dropdown() {
     },
     {
       id: 6,
-      currency: "ETH",
-      imageSrc: require("../assets/ETH.png"),
+      currency: "JPY",
+      imageSrc: require("../assets/JPY.png"),
     },
     {
       id: 7,
@@ -75,6 +61,25 @@ function Dropdown() {
     },
   ];
 
+  useEffect(() => {
+    const API_URL = `https://api.exchangeratesapi.io/latest?base=${selectedCurrency.curr.currency}`;
+
+    // get rates
+    fetch(API_URL)
+      .then((response) => response.json())
+      .then((data) => {
+        var newarr = [];
+
+        Object.entries(data.rates).map((item) =>
+          newarr.push({ currency: item[0], rate: item[1] })
+        );
+
+        setRateResult(newarr);
+      })
+      .catch((err) => console.log(err));
+  }, [selectedCurrency.curr.currency, amount]);
+
+  // console.log(options.map((item) => console.log(item.currency)));
   // set selected currency
   const setSelectedItem = (id) => {
     const found = options.find((el) => el.id === id);
@@ -97,11 +102,9 @@ function Dropdown() {
     rateResult.filter((rate) => {
       return options
         .filter((option) => option.currency !== selectedCurrency.curr.currency)
-        .find(
-          (option) =>
-            rate.pair === option.currency + selectedCurrency.curr.currency
-        );
+        .find((option) => rate.currency === option.currency);
     });
+  console.log(filteredResult);
 
   // it prevents unnecessary re-rendering
   let timer;
@@ -189,9 +192,14 @@ function Dropdown() {
 
       <div className="flex-wrap mt-2">
         {amount ? (
-          rateResult &&
+          filteredResult &&
           filteredResult.map((item, i) => (
-            <Result key={i} pair={item.pair} amount={amount} bid={item.bid} />
+            <Result
+              key={i}
+              currency={item.currency}
+              amount={amount}
+              rate={item.rate}
+            />
           ))
         ) : (
           <div className="text-center pt-5 text-gray-500">
@@ -203,4 +211,4 @@ function Dropdown() {
   );
 }
 
-export default Dropdown;
+export default Calculator;
